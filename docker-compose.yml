@@ -1,0 +1,23 @@
+version: "2.22.0"
+
+services:
+nginx:
+build:
+context: .
+dockerfile: Dockerfile
+ports:
+- ${NGINXPORT}:${NGINXPORT}
+volumes:
+- ./src:/var/www/html/public
+
+mysql:
+image: mariadb:latest
+ports:
+- ${MysqlPort}:${MysqlPort}
+environment:
+- MYSQL_DATABASE=${MYSQL_DATABASE}
+- MYSQL_USER=${MYSQL_DATABASE}
+- MYSQL_PASSWORD=${MYSQL_PASSWORD}
+- MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+volumes:
+- ./mysql:/var/lib/mysql
